@@ -1,0 +1,49 @@
+<!-- Compound Interest Calculator -->
+<div style="background:#f8fcff; max-width:470px; border-radius:24px; margin:60px auto; padding:38px 30px 35px 30px; box-shadow:0 4px 20px rgba(54,67,184,0.11); border:2px solid #3643b8; font-family:'Segoe UI',Verdana,sans-serif;">
+  <h2 style="text-align:center; color:#1d356d; font-size:34px; margin-bottom:24px;">Compound Interest</h2>
+  <div style="margin-bottom:17px;">
+    <label for="ci-principal" style="display:block; color:#183297; font-weight:600;">Principal (₹):</label>
+    <input type="text" id="ci-principal" style="width:100%; font-size:18px; padding:8px; margin-top:4px; border-radius:7px; border:1.3px solid #b1b1c8;">
+  </div>
+  <div style="margin-bottom:17px;">
+    <label for="ci-rate" style="display:block; color:#183297; font-weight:600;">Rate (% p.a.):</label>
+    <input type="text" id="ci-rate" style="width:100%; font-size:18px; padding:8px; margin-top:4px; border-radius:7px; border:1.3px solid #b1b1c8;">
+  </div>
+  <div style="margin-bottom:17px;">
+    <label for="ci-time" style="display:block; color:#183297; font-weight:600;">Time (years):</label>
+    <input type="text" id="ci-time" style="width:100%; font-size:18px; padding:8px; margin-top:4px; border-radius:7px; border:1.3px solid #b1b1c8;">
+  </div>
+  <div style="margin-bottom:26px;">
+    <label for="ci-frequency" style="display:block; color:#183297; font-weight:600;">Compounding per year:</label>
+    <select id="ci-frequency" style="width:100%; font-size:18px; padding:7px; border-radius:7px; border:1.3px solid #b1b1c8;">
+      <option value="1">Yearly (1)</option>
+      <option value="2">Half-Yearly (2)</option>
+      <option value="4">Quarterly (4)</option>
+      <option value="12">Monthly (12)</option>
+      <option value="365">Daily (365)</option>
+    </select>
+  </div>
+  <button onclick="calculateCI()" style="width:100%; font-size:20px; padding:11px 0; background:#2867bf; color:white; border:none; border-radius:8px; box-shadow:0 2px 7px rgba(52,89,185,0.10); cursor:pointer; font-weight:600;">
+    CALCULATE
+  </button>
+  <div id="ci-result" style="text-align:center; font-size:22px; color:#e5620b; font-weight:600; margin-top:28px; min-height:34px;"></div>
+</div>
+
+<script>
+function calculateCI() {
+  var principal = parseFloat(document.getElementById('ci-principal').value);
+  var rate = parseFloat(document.getElementById('ci-rate').value);
+  var time = parseFloat(document.getElementById('ci-time').value);
+  var frequency = parseInt(document.getElementById('ci-frequency').value);
+  var resultDiv = document.getElementById('ci-result');
+  if (isNaN(principal) || isNaN(rate) || isNaN(time) || isNaN(frequency) || principal <= 0 || rate <= 0 || time <= 0) {
+    resultDiv.innerHTML = "Please enter valid, positive values.";
+    return;
+  }
+  var A = principal * Math.pow((1 + (rate/100)/frequency), frequency*time);
+  var CI = A - principal;
+  resultDiv.innerHTML = 
+    "Total Amount: <span style='color:#2867bf;'>&#8377;" + A.toFixed(2) + "</span><br>" +
+    "Compound Interest: <span style='color:#00846b;'>&#8377;" + CI.toFixed(2) + "</span>";
+}
+</script>
