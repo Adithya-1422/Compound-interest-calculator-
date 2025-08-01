@@ -47,7 +47,4 @@ Where:
 - All input values are validated to ensure they are positive and numerical.
 - An error message is displayed if any value is invalid or missing.
 
-## License
-
-This project is released under the MIT License.
 
